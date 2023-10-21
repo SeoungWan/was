@@ -60,6 +60,11 @@ public class MainController {
 	private BCryptPasswordEncoder passwordEncoder;
 
 	/* ==================== */
+	@GetMapping("/event")
+    public String event() {
+        return "event";
+    }
+
 
 	// home page view.
 

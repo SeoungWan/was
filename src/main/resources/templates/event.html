@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Page</title>
+
+    <!-- 필요한 스타일시트와 스크립트를 여기에 추가 -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* viewport height */
+            margin: 0;
+            background-color: #f8f9fa;
+        }
+
+        .content {
+          text-align:center; 
+          margin-top:-50px; /* 이미지가 너무 아래에 위치하는 것을 조정 */
+        }
+
+        .navbar-brand {
+          position:absolute; 
+          top:10px; 
+          left:10px
+        }
+
+        #countdown {
+           font-size: 20px; 
+           font-weight:bold
+         }
+         
+         #purchaseButton {
+           padding : 15px 30px ;
+           font-size :20px ;
+           border-radius :5px ;
+         }
+    </style>
+
+</head>
+<body>
+
+    <!-- Home Button -->
+    <a href="/home" class="navbar-brand"> <img class="ml-minus40"
+        height="70" src="/images/logo1.png">
+    </a>
+
+    <!-- Content -->
+    <div class="content">
+
+      <!-- 이미지 추가 -->
+      <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F138%2F2021%2F06%2F03%2F0002104468_001_20210603110804389.jpg&type=sc960_832" height="1050" width="800" alt="Event Image">
+
+      <!-- 남은 시간 표시와 구매 버튼 -->
+      <div style="display:flex; align-items:center;">
+          <p id="countdown"></p>&nbsp;&nbsp;&nbsp;<button id="purchaseButton" class="btn btn-warning" disabled>구매</button>
+      </div>
+
+   </div>
+
+   <!-- JavaScript 코드 -->
+	<script language='JavaScript'>
+		var SetTime = 20;
+
+		function msg_time() { 
+			m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초"; 
+
+			var msg = "다음 구매 가능까지 남은 시간 :<font color='red'>" + m + "</font>";
+			
+			document.getElementById('countdown').innerHTML = msg;
+
+			SetTime--; 
+
+			if (SetTime <= -1) { 
+				clearInterval(tid); 
+				document.getElementById('purchaseButton').disabled = false;
+				SetTime = -1;
+                document.getElementById('countdown').innerHTML = "다음 구매 가능까지 남은 시간: <font color='red'>0분 0초</font>";
+			} else {
+				document.getElementById('purchaseButton').disabled = true;
+                if(SetTime == -1){
+                    document.getElementById('countdown').innerHTML = "다음 구매 가능까지 남은 시간: <font color='red'>0분 0초</font>";
+                }
+            }
+			
+		}
+
+	window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };
+		
+	</script>
+
+</body>
+</html>
